@@ -36,20 +36,19 @@ class TrainingTypeDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('persons')
+        $queryBuilder = DB::table('training_types')
             ->addSelect(
-                'persons.id',
-                'persons.name as person_name',
-                'persons.emails',
-                'persons.contact_numbers',
-                'organizations.name as organization',
-                'organizations.id as organization_id'
-            )
-            ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
+                'training_types.id',
+                'training_types.title as training_types_title',
+                'training_types.description',
+                'training_types.number_approaches',
+                'training_types.number_repetitions',
+                'training_types.approach_time',
+                'training_types.pause_time',
+            );
 
         $this->addFilter('id', 'persons.id');
-        $this->addFilter('person_name', 'persons.name');
-        $this->addFilter('organization', 'organizations.id');
+        $this->addFilter('training_types_title', 'training_types.title');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -69,49 +68,45 @@ class TrainingTypeDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'person_name',
+            'index'    => 'training_types_title',
             'label'    => trans('admin::app.datagrid.name'),
             'type'     => 'string',
             'sortable' => true,
         ]);
 
         $this->addColumn([
-            'index'    => 'emails',
-            'label'    => trans('admin::app.datagrid.emails'),
-            'type'     => 'string',
-            'sortable' => false,
-            'closure'  => function ($row) {
-                $emails = json_decode($row->emails, true);
-
-                if ($emails) {
-                    return collect($emails)->pluck('value')->join(', ');
-                }
-            },
+            'index'      => 'description',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'    => 'contact_numbers',
-            'label'    => trans('admin::app.datagrid.contact_numbers'),
-            'type'     => 'string',
-            'sortable' => false,
-            'closure'  => function ($row) {
-                $contactNumbers = json_decode($row->contact_numbers, true);
-
-                if ($contactNumbers) {
-                    return collect($contactNumbers)->pluck('value')->join(', ');
-                }
-            },
+            'index'      => 'number_approaches',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'            => 'organization',
-            'label'            => trans('admin::app.datagrid.organization_name'),
-            'type'             => 'dropdown',
-            'dropdown_options' => $this->getOrganizationDropdownOptions(),
-            'sortable'         => false,
-            'closure'  => function ($row) {
-                return "<a href='" . route('admin.contacts.organizations.edit', $row->organization_id) . "' target='_blank'>" . $row->organization . "</a>";
-            },
+            'index'      => 'number_repetitions',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'approach_time',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'pause_time',
+            'label'      => trans('admin::app.datagrid.id'),
+            'type'       => 'string',
+            'sortable'   => true,
         ]);
     }
 

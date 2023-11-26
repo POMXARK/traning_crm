@@ -30,8 +30,31 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
                     Route::put('mass-destroy', 'TrainingTypeController@massDestroy')->name('admin.training_types.mass_delete');
                 });
+            });
 
+            // Contacts Routes
+            Route::group([
+                'prefix'    => 'contacts',
+                'namespace' => 'CRM\Admin\Http\Controllers\TrainingPlan'
+            ], function () {
+                // Customers Routes
+                Route::prefix('training_plan')->group(function () {
+                    Route::get('', 'TrainingPlanController@index')->name('admin.training_plan.index');
 
+                    Route::get('create', 'TrainingPlanController@create')->name('admin.training_plan.create');
+
+                    Route::post('create', 'TrainingPlanController@store')->name('admin.training_plan.store');
+
+                    Route::get('edit/{id?}', 'TrainingPlanController@edit')->name('admin.training_plan.edit');
+
+                    Route::put('edit/{id}', 'TrainingPlanController@update')->name('admin.training_plan.update');
+
+                    Route::get('search', 'TrainingPlanController@search')->name('admin.training_plan.search');
+
+                    Route::delete('{id}', 'TrainingPlanController@destroy')->name('admin.training_plan.delete');
+
+                    Route::put('mass-destroy', 'TrainingPlanController@massDestroy')->name('admin.training_plan.mass_delete');
+                });
         });
         });
     });

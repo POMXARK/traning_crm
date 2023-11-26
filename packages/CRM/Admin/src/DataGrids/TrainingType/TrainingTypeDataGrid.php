@@ -69,42 +69,42 @@ class TrainingTypeDataGrid extends DataGrid
 
         $this->addColumn([
             'index'    => 'training_types_title',
-            'label'    => trans('admin::app.datagrid.name'),
+            'label'    => trans('admin::app.datagrid.title'),
             'type'     => 'string',
             'sortable' => true,
         ]);
 
         $this->addColumn([
             'index'      => 'description',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.description'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'number_approaches',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.number_approaches'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'number_repetitions',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.number_repetitions'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'approach_time',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.approach_time'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
 
         $this->addColumn([
             'index'      => 'pause_time',
-            'label'      => trans('admin::app.datagrid.id'),
+            'label'      => trans('admin::app.datagrid.pause_time'),
             'type'       => 'string',
             'sortable'   => true,
         ]);

@@ -113,5 +113,7 @@ Please don't disclose security vulnerabilities publicly. If you find any securit
 
 
 после добавления нового модуля или providers выполнить
+php artisan vendor:publish --force --all
+
 добавить в сomposer.json "autoload": {"psr-4": {
 composer dump-autoload

@@ -689,6 +689,10 @@
         ],
 
         'datagrid' => [
+            'number_approaches'   => 'number of approaches',
+            'number_repetitions'  => 'number of repetitions',
+            'approach_time'       => 'approach time',
+            'pause_time'          => 'pause time',
             'id'                  => 'ID',
             'name'                => 'Name',
             'code'                => 'Code',

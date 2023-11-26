@@ -70,7 +70,8 @@
             "Webkul\\Workflow\\": "packages/Webkul/Workflow/src",
 
             "CRM\\Core\\": "packages/CRM/Core/src",
-            "CRM\\Admin\\": "packages/CRM/Admin/src"
+            "CRM\\Admin\\": "packages/CRM/Admin/src",
+            "CRM\\Training\\": "packages/CRM/Training/src"
 
         }
     },

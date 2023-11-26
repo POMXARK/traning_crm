@@ -133,13 +133,27 @@ class AttributeRepository extends Repository
     {
         $lookup = config('attribute_lookups.' . $lookup);
 
+        $repository = app($lookup['repository']);
+
+        $params = [[$lookup['label_column'] ?? 'name', 'like', '%' . urldecode($query) . '%']];
+
+        if(array_key_exists( 'binding', $lookup)) {
+            if (count($columns)) {
+                $builder = $repository->where($columns);
+            } else {
+                $builder = $repository;
+            }
+
+            return $builder->with($lookup['binding'])->whereHas($lookup['binding'], function ($query) use ($params) {
+                return $query->where($params);
+            })->get();
+        }
+
         if (! count($columns)) {
             $columns = [($lookup['value_column'] ?? 'id') . ' as id' , ($lookup['label_column'] ?? 'name') . ' as name'];
         }
 
-        return app($lookup['repository'])->findWhere([
-            [$lookup['label_column'] ?? 'name', 'like', '%' . urldecode($query) . '%']
-        ], $columns);
+        return $repository->findWhere($params, $columns);
     }
 
     /**

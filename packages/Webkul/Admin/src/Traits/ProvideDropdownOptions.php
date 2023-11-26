@@ -157,6 +157,35 @@ trait ProvideDropdownOptions
     }
 
     /**
+     * Get lead source options.
+     *
+     * @return array
+     */
+    public function getDropdownOptions(string $Repository): array
+    {
+        $options = app($Repository)
+            ->get(['id as value', 'name as label'])
+            ->map(function ($item, $key) {
+                $item->disabled = false;
+
+                $item->selected = false;
+
+                return $item;
+            })
+            ->toArray();
+
+        return [
+            [
+                'label'    => trans('admin::app.common.select-type'),
+                'value'    => '',
+                'disabled' => true,
+                'selected' => true,
+            ],
+            ...$options
+        ];
+    }
+
+    /**
      * Get organization dropdown options.
      *
      * @return array
@@ -201,6 +230,28 @@ trait ProvideDropdownOptions
             ], [
                 'label'    => trans('admin::app.settings.roles.custom'),
                 'value'    => 'custom',
+                'disabled' => false,
+                'selected' => false,
+            ],
+        ];
+    }
+
+    public function getBoolDropdownOptions(): array
+    {
+        return [
+            [
+                'label'    => trans('admin::app.common.select-type'),
+                'value'    => '',
+                'disabled' => true,
+                'selected' => true,
+            ], [
+                'label'    => trans('admin::app.settings.attributes.yes'),
+                'value'    => '1',
+                'disabled' => false,
+                'selected' => false,
+            ], [
+                'label'    => trans('admin::app.settings.attributes.no'),
+                'value'    => '0',
                 'disabled' => false,
                 'selected' => false,
             ],
@@ -252,13 +303,13 @@ trait ProvideDropdownOptions
                 'value'    => '',
                 'disabled' => true,
                 'selected' => true,
-            ], 
+            ],
             [
                 'label'    => trans('admin::app.common.system_attribute'),
                 'value'    => '0',
                 'disabled' => false,
                 'selected' => false,
-            ], 
+            ],
             [
                 'label'    => trans('admin::app.common.custom_attribute'),
                 'value'    => '1',

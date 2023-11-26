@@ -3,6 +3,7 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
 
@@ -50,6 +51,7 @@ class AttributeValueRepository extends Repository
     public function save(array $data, $entityId)
     {
         $conditions = ['entity_type' => $data['entity_type']];
+//        $data = self::onlyCustomAttributes($data);
 
         if (isset($data['quick_add'])) {
             $conditions['quick_add'] = 1;
@@ -156,5 +158,24 @@ class AttributeValueRepository extends Repository
         }
 
         return $data;
+    }
+
+    /**
+     * Will return only attributes created through CRM to the admin panel
+     *
+     * @param array $data
+     * @return array
+     */
+    static function onlyCustomAttributes(array $data): array
+    {
+        $columns = Schema::getColumnListing($data['entity_type']);
+        $out = $data;
+        foreach ($columns as $column) {
+            if (array_key_exists($column, $data)) {
+                unset($out[$column]);
+            }
+        }
+
+        return $out;
     }
 }

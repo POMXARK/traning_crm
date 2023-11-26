@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create(self::TABLE, function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title')->comment('Наименование');
+            $table->string('name')->comment('Наименование');
 
             $table->text('description')->nullable()->comment('Описание');
 

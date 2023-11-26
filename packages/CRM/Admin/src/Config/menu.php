@@ -9,6 +9,13 @@ return [
         'icon-class' => 'activities-icon',
     ],
     [
+        'key'        => 'training_plan',
+        'name'       => 'admin::app.layouts.training_plan',
+        'route'      => 'admin.training_plan.index',
+        'sort'       => 2,
+        'icon-class' => 'quotes-icon',
+    ],
+    [
         'key'        => 'settings',
         'name'       => 'admin::app.layouts.settings',
         'route'      => 'admin.settings.index',

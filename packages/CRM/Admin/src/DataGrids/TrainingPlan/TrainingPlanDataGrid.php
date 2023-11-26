@@ -1,12 +1,13 @@
 <?php
 
-namespace CRM\Admin\DataGrids\TrainingType;
+namespace CRM\Admin\DataGrids\TrainingPlan;
 
+use CRM\Training\Repositories\TrainingTypeRepository;
 use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Traits\ProvideDropdownOptions;
 use Webkul\UI\DataGrid\DataGrid;
 
-class TrainingTypeDataGrid extends DataGrid
+class TrainingPlanDataGrid extends DataGrid
 {
     use ProvideDropdownOptions;
 
@@ -36,19 +37,19 @@ class TrainingTypeDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('training_types')
+        $queryBuilder = DB::table('training_plan')
             ->addSelect(
-                'training_types.id',
+                'training_plan.id',
+                'training_plan.user_id as training_plan_user_id',
                 'training_types.name as training_types_name',
-                'training_types.description',
-                'training_types.number_approaches',
-                'training_types.number_repetitions',
-                'training_types.approach_time',
-                'training_types.pause_time',
-            );
+                'training_plan.day_week',
+                'training_plan.time',
+            )
+            ->leftJoin('training_types', 'training_plan.training_types_id', '=', 'training_types.id')
+            ->leftJoin('users', 'training_plan.user_id', '=', 'users.id');
 
-        $this->addFilter('id', 'training_types.id');
-        $this->addFilter('training_types_name', 'training_types.name');
+        $this->addFilter('id', 'training_plan.id');
+        $this->addFilter('training_types_name', 'training_types.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -68,43 +69,23 @@ class TrainingTypeDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'    => 'training_types_name',
-            'label'    => trans('admin::app.datagrid.title'),
-            'type'     => 'string',
-            'sortable' => true,
+            'index'      => 'training_types_name',
+            'label'      => trans('admin::app.training.training_plan.training'),
+            'type'             => 'dropdown',
+            'dropdown_options' => $this->getDropdownOptions(TrainingTypeRepository::class),
+            'sortable'         => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'description',
-            'label'      => trans('admin::app.datagrid.description'),
+            'index'      => 'day_week',
+            'label'      => trans('admin::app.datagrid.day_week'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'number_approaches',
-            'label'      => trans('admin::app.datagrid.number_approaches'),
-            'type'       => 'string',
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'number_repetitions',
-            'label'      => trans('admin::app.datagrid.number_repetitions'),
-            'type'       => 'string',
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'approach_time',
-            'label'      => trans('admin::app.datagrid.approach_time'),
-            'type'       => 'string',
-            'sortable'   => true,
-        ]);
-
-        $this->addColumn([
-            'index'      => 'pause_time',
-            'label'      => trans('admin::app.datagrid.pause_time'),
+            'index'      => 'time',
+            'label'      => trans('admin::app.datagrid.time'),
             'type'       => 'string',
             'sortable'   => true,
         ]);
@@ -120,14 +101,14 @@ class TrainingTypeDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.training_types.edit',
+            'route'  => 'admin.training_plan.edit',
             'icon'   => 'pencil-icon',
         ]);
 
         $this->addAction([
             'title'        => trans('ui::app.datagrid.delete'),
             'method'       => 'DELETE',
-            'route'        => 'admin.training_types.delete',
+            'route'        => 'admin.training_plan.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => trans('admin::app.contacts.persons.person')]),
             'icon'         => 'trash-icon',
         ]);
@@ -143,7 +124,7 @@ class TrainingTypeDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('ui::app.datagrid.delete'),
-            'action' => route('admin.training_types.mass_delete'),
+            'action' => route('admin.training_plan.mass_delete'),
             'method' => 'PUT',
         ]);
     }

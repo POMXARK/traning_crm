@@ -5,7 +5,7 @@ namespace CRM\Admin\Http\Controllers\TrainingPlan;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Attribute\Http\Requests\AttributeForm;
-use CRM\Training\Repositories\TrainingTypeRepository;
+use CRM\TrainingPlan\Repositories\TrainingPlanRepository;
 
 class TrainingPlanController extends Controller
 {
@@ -14,20 +14,20 @@ class TrainingPlanController extends Controller
      *
      * @var \Webkul\Contact\Repositories\PersonRepository
      */
-    protected $trainingTypeRepository;
+    protected $trainingPlanRepository;
 
     /**
      * Create a new controller instance.
      *
-     * @param \Webkul\Contact\Repositories\PersonRepository  $trainingTypeRepository
+     * @param \Webkul\Contact\Repositories\PersonRepository  $trainingPlanRepository
      *
      * @return void
      */
-    public function __construct(TrainingTypeRepository $trainingTypeRepository)
+    public function __construct(TrainingPlanRepository $trainingPlanRepository)
     {
-        $this->trainingTypeRepository = $trainingTypeRepository;
+        $this->trainingPlanRepository = $trainingPlanRepository;
 
-        request()->request->add(['entity_type' => 'training_types']);
+        request()->request->add(['entity_type' => 'training_plan']);
     }
 
     /**
@@ -38,10 +38,10 @@ class TrainingPlanController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(\CRM\Admin\DataGrids\TrainingType\TrainingTypeDataGrid::class)->toJson();
+            return app(\CRM\Admin\DataGrids\TrainingPlan\TrainingPlanDataGrid::class)->toJson();
         }
 
-        return view('admin::training.training_type.index');
+        return view('admin::training.training_plan.index');
     }
 
     /**
@@ -51,7 +51,7 @@ class TrainingPlanController extends Controller
      */
     public function create()
     {
-        return view('admin::training.training_type.create');
+        return view('admin::training.training_plan.create');
     }
 
     /**
@@ -64,13 +64,17 @@ class TrainingPlanController extends Controller
     {
         Event::dispatch('contacts.person.create.before');
 
-        $person = $this->trainingTypeRepository->create(request()->all());
+        $data = request()->all();
+        $currentUser = auth()->guard()->user();
+        $data['user_id'] = $currentUser->id;
+
+        $person = $this->trainingPlanRepository->create($data);
 
         Event::dispatch('contacts.person.create.after', $person);
 
-        session()->flash('success', trans('admin::app.contacts.training_type.create-success'));
+        session()->flash('success', trans('admin::app.contacts.training_plan.create-success'));
 
-        return redirect()->route('admin.training_types.index');
+        return redirect()->route('admin.training_plan.index');
     }
 
     /**
@@ -81,9 +85,9 @@ class TrainingPlanController extends Controller
      */
     public function edit($id)
     {
-        $person = $this->trainingTypeRepository->findOrFail($id);
+        $person = $this->trainingPlanRepository->findOrFail($id);
 
-        return view('admin::training.training_type.edit', compact('person'));
+        return view('admin::training.training_plan.edit', compact('person'));
     }
 
     /**
@@ -97,13 +101,13 @@ class TrainingPlanController extends Controller
     {
         Event::dispatch('contacts.person.update.before', $id);
 
-        $person = $this->trainingTypeRepository->update(request()->all(), $id);
+        $person = $this->trainingPlanRepository->update(request()->all(), $id);
 
         Event::dispatch('contacts.person.update.after', $person);
 
         session()->flash('success', trans('admin::app.contacts.persons.update-success'));
 
-        return redirect()->route('admin.training_types.index');
+        return redirect()->route('admin.training_plans.index');
     }
 
     /**
@@ -113,7 +117,7 @@ class TrainingPlanController extends Controller
      */
     public function search()
     {
-        $results = $this->trainingTypeRepository->findWhere([
+        $results = $this->trainingPlanRepository->findWhere([
             ['name', 'like', '%' . urldecode(request()->input('query')) . '%']
         ]);
 
@@ -128,12 +132,12 @@ class TrainingPlanController extends Controller
      */
     public function destroy($id)
     {
-        $person = $this->trainingTypeRepository->findOrFail($id);
+        $person = $this->trainingPlanRepository->findOrFail($id);
 
         try {
             Event::dispatch('contacts.person.delete.before', $id);
 
-            $this->trainingTypeRepository->delete($id);
+            $this->trainingPlanRepository->delete($id);
 
             Event::dispatch('contacts.person.delete.after', $id);
 
@@ -157,7 +161,7 @@ class TrainingPlanController extends Controller
         foreach (request('rows') as $personId) {
             Event::dispatch('contact.person.delete.before', $personId);
 
-            $this->trainingTypeRepository->delete($personId);
+            $this->trainingPlanRepository->delete($personId);
 
             Event::dispatch('contact.person.delete.after', $personId);
         }

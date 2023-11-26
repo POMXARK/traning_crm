@@ -97,7 +97,7 @@ return [
     |
      */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,6 +113,7 @@ return [
         'en' => 'English',
         'tr' => 'Türkçe',
         'ar' => 'Arabic',
+        'ru' => 'Russian',
     ],
 
     /*
@@ -242,6 +243,7 @@ return [
         CRM\Core\Providers\CoreServiceProvider::class,
         CRM\Admin\Providers\AdminServiceProvider::class,
         CRM\Training\Providers\TrainingServiceProvider::class,
+        CRM\TrainingPlan\Providers\TrainingPlanServiceProvider::class,
     ],
 
     /*

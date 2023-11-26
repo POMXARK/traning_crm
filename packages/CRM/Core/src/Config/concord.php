@@ -20,6 +20,7 @@ return [
 
         \CRM\Admin\Providers\ModuleServiceProvider::class,
         \CRM\Training\Providers\ModuleServiceProvider::class,
+        \CRM\TrainingPlan\Providers\ModuleServiceProvider::class,
     ],
     'register_route_models' => true
 ];

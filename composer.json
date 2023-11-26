@@ -71,7 +71,8 @@
 
             "CRM\\Core\\": "packages/CRM/Core/src",
             "CRM\\Admin\\": "packages/CRM/Admin/src",
-            "CRM\\Training\\": "packages/CRM/Training/src"
+            "CRM\\Training\\": "packages/CRM/Training/src",
+            "CRM\\TrainingPlan\\": "packages/CRM/TrainingPlan/src"
 
         }
     },

@@ -69,7 +69,8 @@
             "Webkul\\WebForm\\": "packages/Webkul/WebForm/src",
             "Webkul\\Workflow\\": "packages/Webkul/Workflow/src",
 
-            "CRM\\Core\\": "packages/CRM/Core/src"
+            "CRM\\Core\\": "packages/CRM/Core/src",
+            "CRM\\Admin\\": "packages/CRM/Admin/src"
 
         }
     },

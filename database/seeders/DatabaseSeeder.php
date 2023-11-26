@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use CRM\Admin\Database\Seeders\DatabaseSeeder as CRMDatabaseSeeder;
 use Illuminate\Database\Seeder;
 use Webkul\Admin\Database\Seeders\DatabaseSeeder as AdminDatabaseSeeder;
 use Webkul\Core\Database\Seeders\DatabaseSeeder as CoreDatabaseSeeder;
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminDatabaseSeeder::class);
+        $this->call(CRMDatabaseSeeder::class);
         $this->call(CoreDatabaseSeeder::class);
         $this->call(UserDatabaseSeeder::class);
     }

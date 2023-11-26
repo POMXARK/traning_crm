@@ -83,7 +83,7 @@ class TrainingTypeController extends Controller
     {
         $person = $this->trainingTypeRepository->findOrFail($id);
 
-        return view('admin::contacts.persons.edit', compact('person'));
+        return view('admin::training.training_type.edit', compact('person'));
     }
 
     /**
@@ -97,13 +97,13 @@ class TrainingTypeController extends Controller
     {
         Event::dispatch('contacts.person.update.before', $id);
 
-        $person = $this->trainingTypeRepository->update($this->sanitizeRequestedPersonData(), $id);
+        $person = $this->trainingTypeRepository->update(request()->all(), $id);
 
         Event::dispatch('contacts.person.update.after', $person);
 
         session()->flash('success', trans('admin::app.contacts.persons.update-success'));
 
-        return redirect()->route('admin.contacts.persons.index');
+        return redirect()->route('admin.training_types.index');
     }
 
     /**

@@ -120,14 +120,14 @@ class TrainingTypeDataGrid extends DataGrid
         $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',
-            'route'  => 'admin.contacts.persons.edit',
+            'route'  => 'admin.training_types.edit',
             'icon'   => 'pencil-icon',
         ]);
 
         $this->addAction([
             'title'        => trans('ui::app.datagrid.delete'),
             'method'       => 'DELETE',
-            'route'        => 'admin.contacts.persons.delete',
+            'route'        => 'admin.training_types.delete',
             'confirm_text' => trans('ui::app.datagrid.massaction.delete', ['resource' => trans('admin::app.contacts.persons.person')]),
             'icon'         => 'trash-icon',
         ]);

@@ -20,7 +20,7 @@
 
         {!! view_render_event('admin.contacts.persons.edit.header.after', ['person' => $person]) !!}
 
-        <form method="POST" action="{{ route('admin.contacts.persons.update', $person->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.training_types.update', $person->id) }}" @submit.prevent="onSubmit" enctype="multipart/form-data">
 
             <div class="page-content">
                 <div class="form-container">
@@ -47,7 +47,7 @@
                 
                             @include('admin::common.custom-attributes.edit', [
                                 'customAttributes' => app('Webkul\Attribute\Repositories\AttributeRepository')->findWhere([
-                                    'entity_type' => 'persons',
+                                    'entity_type' => 'training_types',
                                 ]),
                                 'entity'           => $person,
                             ])

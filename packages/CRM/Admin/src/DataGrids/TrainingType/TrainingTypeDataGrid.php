@@ -143,7 +143,7 @@ class TrainingTypeDataGrid extends DataGrid
         $this->addMassAction([
             'type'   => 'delete',
             'label'  => trans('ui::app.datagrid.delete'),
-            'action' => route('admin.contacts.persons.mass_delete'),
+            'action' => route('admin.training_types.mass_delete'),
             'method' => 'PUT',
         ]);
     }

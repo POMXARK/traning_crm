@@ -238,6 +238,10 @@ return [
         Webkul\User\Providers\UserServiceProvider::class,
         Webkul\WebForm\Providers\WebFormServiceProvider::class,
         Webkul\Workflow\Providers\WorkflowServiceProvider::class,
+
+        CRM\Core\Providers\CoreServiceProvider::class,
+//        CRM\Admin\Providers\AdminServiceProvider::class,
+//        CRM\Training\Providers\TrainingServiceProvider::class,
     ],
 
     /*

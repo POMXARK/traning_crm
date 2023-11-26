@@ -5,6 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/CRM/Admin/src" isTestSource="false" packagePrefix="CRM\Admin\" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/CRM/Training/src" isTestSource="false" packagePrefix="CRM\Training\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/Webkul/Activity/src" isTestSource="false" packagePrefix="Webkul\Activity\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/Webkul/Admin/src" isTestSource="false" packagePrefix="Webkul\Admin\" />
       <sourceFolder url="file://$MODULE_DIR$/packages/Webkul/Attribute/src" isTestSource="false" packagePrefix="Webkul\Attribute\" />

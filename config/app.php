@@ -241,7 +241,7 @@ return [
 
         CRM\Core\Providers\CoreServiceProvider::class,
         CRM\Admin\Providers\AdminServiceProvider::class,
-//        CRM\Training\Providers\TrainingServiceProvider::class,
+        CRM\Training\Providers\TrainingServiceProvider::class,
     ],
 
     /*

@@ -47,7 +47,7 @@ class TrainingTypeDataGrid extends DataGrid
                 'training_types.pause_time',
             );
 
-        $this->addFilter('id', 'persons.id');
+        $this->addFilter('id', 'training_types.id');
         $this->addFilter('training_types_title', 'training_types.title');
 
         $this->setQueryBuilder($queryBuilder);

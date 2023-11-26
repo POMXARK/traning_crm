@@ -2,6 +2,13 @@
 
 return [
     [
+        'key'        => 'training_types',
+        'name'       => 'admin::app.layouts.training_types',
+        'route'      => 'admin.training_types.index',
+        'sort'       => 1,
+        'icon-class' => 'activities-icon',
+    ],
+    [
         'key'        => 'settings',
         'name'       => 'admin::app.layouts.settings',
         'route'      => 'admin.settings.index',

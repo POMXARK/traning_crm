@@ -11,10 +11,10 @@
 
         <div class="page-header">
 
-            {{ Breadcrumbs::render('contacts.persons.edit', $person) }}
+            {{ Breadcrumbs::render('training.training_types.edit', $person) }}
 
             <div class="page-title">
-                <h1>{{ __('admin::app.contacts.persons.edit-title') }}</h1>
+                <h1>{{ __('admin::app.training.training_types.edit-title') }}</h1>
             </div>
         </div>
 
@@ -33,7 +33,7 @@
                                 {{ __('admin::app.contacts.persons.save-btn-title') }}
                             </button>
 
-                            <a href="{{ route('admin.contacts.persons.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
+                            <a href="{{ route('admin.training_types.index') }}">{{ __('admin::app.contacts.persons.back') }}</a>
 
                             {!! view_render_event('admin.contacts.persons.edit.form_buttons.after', ['person' => $person]) !!}
                         </div>

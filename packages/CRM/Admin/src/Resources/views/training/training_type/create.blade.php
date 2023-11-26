@@ -11,10 +11,10 @@
 
         <div class="page-header">
 
-            {{ Breadcrumbs::render('contacts.persons.create') }}
+            {{ Breadcrumbs::render('training.training_types.create') }}
 
             <div class="page-title">
-                <h1>{{ __('admin::app.contacts.persons.create-title') }}</h1>
+                <h1>{{ __('admin::app.training.training_types.create-title') }}</h1>
             </div>
         </div>
 

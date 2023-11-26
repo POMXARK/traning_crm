@@ -11,9 +11,9 @@
                 <h1>
                     {!! view_render_event('admin.contacts.persons.index.persons.before') !!}
 
-                    {{ Breadcrumbs::render('contacts.persons') }}
+                    {{ Breadcrumbs::render('training.training_types') }}
 
-                    {{ __('admin::app.contacts.persons.title') }}
+                    {{ __('admin::app.layouts.training_types') }}
 
                     {!! view_render_event('admin.contacts.persons.index.persons.after') !!}
                 </h1>
@@ -21,7 +21,7 @@
 
             @if (bouncer()->hasPermission('contacts.persons.create'))
                 <template v-slot:table-action>
-                    <a href="{{ route('admin.training_types.create') }}" class="btn btn-md btn-primary">{{ __('admin::app.contacts.persons.create-title') }}</a>
+                    <a href="{{ route('admin.training_types.create') }}" class="btn btn-md btn-primary">{{ __('admin::app.training.training_types.create-title') }}</a>
                 </template>
             @endif
         <table-component>

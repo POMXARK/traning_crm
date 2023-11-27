@@ -45,5 +45,9 @@ return [
         'name'         => 'Training Plan',
         'repository'   => 'CRM\Training\Repositories\TrainingTypeRepository',
         'label_column' => 'name',
+    ],
+    'days_week' => [
+        'name'         => 'Day Week',
+        'repository'   => 'CRM\TrainingPlan\Repositories\DaysWeekRepository',
     ]
 ];

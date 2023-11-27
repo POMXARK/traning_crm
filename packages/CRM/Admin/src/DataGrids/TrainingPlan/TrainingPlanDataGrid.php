@@ -3,6 +3,7 @@
 namespace CRM\Admin\DataGrids\TrainingPlan;
 
 use CRM\Training\Repositories\TrainingTypeRepository;
+use CRM\TrainingPlan\Repositories\DaysWeekRepository;
 use Illuminate\Support\Facades\DB;
 use Webkul\Admin\Traits\ProvideDropdownOptions;
 use Webkul\UI\DataGrid\DataGrid;
@@ -42,14 +43,16 @@ class TrainingPlanDataGrid extends DataGrid
                 'training_plan.id',
                 'training_plan.user_id as training_plan_user_id',
                 'training_types.name as training_types_name',
-                'training_plan.day_week',
+                'days_week.name as day_week_name',
                 'training_plan.time',
             )
             ->leftJoin('training_types', 'training_plan.training_types_id', '=', 'training_types.id')
+            ->leftJoin('days_week', 'training_plan.day_week_id', '=', 'days_week.id')
             ->leftJoin('users', 'training_plan.user_id', '=', 'users.id');
 
         $this->addFilter('id', 'training_plan.id');
         $this->addFilter('training_types_name', 'training_types.id');
+        $this->addFilter('day_week_name', 'days_week.id');
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -77,10 +80,11 @@ class TrainingPlanDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
-            'index'      => 'day_week',
+            'index'      => 'day_week_name',
             'label'      => trans('admin::app.datagrid.day_week'),
-            'type'       => 'string',
-            'sortable'   => true,
+            'type'             => 'dropdown',
+            'dropdown_options' => $this->getDropdownOptions(DaysWeekRepository::class),
+            'sortable'         => true,
         ]);
 
         $this->addColumn([

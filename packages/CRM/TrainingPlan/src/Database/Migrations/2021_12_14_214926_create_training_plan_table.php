@@ -23,7 +23,9 @@ return new class extends Migration
             $table->unsignedInteger('training_types_id');
             $table->foreign('training_types_id')->references('id')->on('training_types')->onDelete('cascade');
 
-            $table->text('day_week')->comment('День недели');
+            $table->unsignedInteger('day_week_id');
+            $table->foreign('day_week_id')->references('id')->on('days_week')->onDelete('cascade');
+
             $table->text('time')->comment('Время');
 
             $table->timestamps();

@@ -99,6 +99,13 @@ class TrainingPlanDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'title'  => trans('ui::app.datagrid.view'),
+            'method' => 'GET',
+            'route'  => 'admin.training_plan.view',
+            'icon'   => 'eye-icon',
+        ]);
+
+        $this->addAction([
             'title'  => trans('ui::app.datagrid.edit'),
             'method' => 'GET',
             'route'  => 'admin.training_plan.edit',

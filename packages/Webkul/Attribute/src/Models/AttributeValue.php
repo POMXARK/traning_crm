@@ -31,6 +31,7 @@ class AttributeValue extends Model implements AttributeValueContract
      */
     public static $attributeTypeFields = [
         'text'        => 'text_value',
+        'time'        => 'text_value',
         'textarea'    => 'text_value',
         'price'       => 'float_value',
         'boolean'     => 'boolean_value',

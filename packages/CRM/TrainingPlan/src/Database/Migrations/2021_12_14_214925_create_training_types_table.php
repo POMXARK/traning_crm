@@ -29,6 +29,8 @@ return new class extends Migration
 
             $table->string('pause_time',5)->comment('Время паузы минуты:секунды');
 
+            $table->string('rest_between_approaches',5)->comment('Отдых между подходами минуты:секунды');
+
             $table->timestamps();
         });
 

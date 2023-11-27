@@ -78,6 +78,46 @@ class TrainingPlanController extends Controller
     }
 
     /**
+     * Display a resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function view($id)
+    {
+//        $call = $this->trainingPlanRepository->join('users', 'users.id', '=', 'calls.user_id')->findOrFail($id);
+//
+//        $models = $this->trainingPlanRepository->join('users', 'users.id', '=', 'calls.user_id')
+//            ->where('client_id', $call->client_id)->get();
+
+//        $history = $models->filter(function ($model) use ($id) {
+//            return $model->id != $id;
+//        });
+
+//        $currentUser = auth()->guard('user')->user();
+//
+//        if ($currentUser->view_permission != 'global') {
+//            if ($currentUser->view_permission == 'group') {
+//                $userIds = app('\Webkul\User\Repositories\UserRepository')->getCurrentUserGroupsUserIds();
+//
+//                if (! in_array($call->user_id, $userIds)) {
+//                    return redirect()->route('admin.calls.index');
+//                }
+//            } else {
+//                if ($call->user_id != $currentUser->id) {
+//                    return redirect()->route('admin.calls.index');
+//                }
+//            }
+//        }
+
+//        return view('admin::calls.view',  ['lead' => $call, 'history' => $history]);
+
+        $person = $this->trainingPlanRepository->findOrFail($id)->trainingType()->get()->first();
+
+        return view('admin::training.training_plan.view', compact('person'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -107,7 +147,7 @@ class TrainingPlanController extends Controller
 
         session()->flash('success', trans('admin::app.contacts.persons.update-success'));
 
-        return redirect()->route('admin.training_plans.index');
+        return redirect()->route('admin.training_plan.index');
     }
 
     /**

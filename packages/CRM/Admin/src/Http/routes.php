@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
 
                     Route::post('create', 'TrainingPlanController@store')->name('admin.training_plan.store');
 
+                    Route::get('view/{id?}', 'TrainingPlanController@view')->name('admin.training_plan.view');
                     Route::get('edit/{id?}', 'TrainingPlanController@edit')->name('admin.training_plan.edit');
 
                     Route::put('edit/{id}', 'TrainingPlanController@update')->name('admin.training_plan.update');

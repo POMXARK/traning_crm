@@ -745,6 +745,7 @@ return [
         'day_week'            => 'День недели',
         'time'                => 'Время',
         'pause_time'          => 'Время паузы',
+        'rest_between_approaches' => 'Отдых между повторами',
         'id' => 'ID',
         'name' => 'Имя',
         'organization-name' => 'Наименование организации',

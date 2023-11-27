@@ -45,6 +45,7 @@ class TrainingTypeDataGrid extends DataGrid
                 'training_types.number_repetitions',
                 'training_types.approach_time',
                 'training_types.pause_time',
+                'training_types.rest_between_approaches',
             );
 
         $this->addFilter('id', 'training_types.id');
@@ -105,6 +106,13 @@ class TrainingTypeDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'pause_time',
             'label'      => trans('admin::app.datagrid.pause_time'),
+            'type'       => 'string',
+            'sortable'   => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'rest_between_approaches',
+            'label'      => trans('admin::app.datagrid.rest_between_approaches'),
             'type'       => 'string',
             'sortable'   => true,
         ]);

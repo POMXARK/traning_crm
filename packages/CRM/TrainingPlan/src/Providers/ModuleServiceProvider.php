@@ -9,5 +9,6 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
     protected $models = [
         \CRM\TrainingPlan\Models\TrainingPlan::class,
         \CRM\TrainingPlan\Models\DaysWeek::class,
+        \CRM\TrainingPlan\Models\DailyTrainingStatistics::class,
     ];
 }

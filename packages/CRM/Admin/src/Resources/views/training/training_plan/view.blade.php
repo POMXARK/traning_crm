@@ -7,7 +7,6 @@
                :rest='"{{ asset('vendor/CRM/admin/assets/rest.mp3') }}"'
                :start='"{{ asset('vendor/CRM/admin/assets/start.mp3') }}"'
                :pause='"{{ asset('vendor/CRM/admin/assets/pause.mp3') }}"'
-
 ></display-field>
 
 {{--{{$person->approach_time}}--}}
@@ -94,6 +93,7 @@
                                 this.playAudio('rest');
                                 if (this.data.number_approaches === 0) {
                                     this.playAudio('pause');
+                                    this.send();
                                     alert('Время вышло!');
                                     clearInterval(interval);
                                 } else {
@@ -120,12 +120,12 @@
                             }
                         }, 1000);
                     },
-                     timeToSeconds(time) {
+                    timeToSeconds(time) {
                         const [minutes, sec] = time.split(':').map(Number);
                         return minutes * 60 + sec;
                     },
                     // Форматируем время для отображения
-                     secondsToMMSS(seconds, action) {
+                    secondsToMMSS(seconds, action) {
                         minutes = Math.floor(seconds / 60);
                         seconds = seconds % 60;
 
@@ -140,13 +140,13 @@
                         if (action === 'run') {
                             this.minutes = 'Время подхода: ' + minutes + ':' + seconds;
                         }
-                         if (action === 'pause') {
-                             this.minutes = 'Время отдыха: ' + minutes + ':' + seconds;
-                         }
-                         if (action === 'rest') {
-                             this.minutes = 'Время перерыва: ' + minutes + ':' + seconds;
-                         }
-                     },
+                        if (action === 'pause') {
+                            this.minutes = 'Время отдыха: ' + minutes + ':' + seconds;
+                        }
+                        if (action === 'rest') {
+                            this.minutes = 'Время перерыва: ' + minutes + ':' + seconds;
+                        }
+                    },
                     playAudio(ref) {
                         let audio = null;
                         switch (ref) {
@@ -170,6 +170,16 @@
                             audio.pause();
                             audio.currentTime = 0;
                         }
+                    },
+                    send() {
+                        this.$http.post(`{{ route('admin.api.statistics.day.create') }}`, {
+                            statistics: this.data
+                        }).then(response => {
+                            this.cards = response.data;
+
+                            this.showCardOptions = false;
+                        })
+                            .catch(error => { console.log('error:' , error)});
                     },
                 },
 

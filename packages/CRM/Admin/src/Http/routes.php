@@ -7,6 +7,30 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
         // Admin Routes
         Route::group(['middleware' => ['user']], function () {
 
+            // Dashboard Route
+            Route::get('statistics', 'CRM\Admin\Http\Controllers\Admin\StatisticController@index')->name('admin.statistics.index');
+
+            Route::get('statistics_template', 'CRM\Admin\Http\Controllers\Admin\StatisticController@template')->name('admin.statistics.template');
+
+            // API routes
+            Route::group([
+                'prefix'    => 'api',
+            ], function () {
+                Route::group([
+                    'prefix'    => 'statistics',
+                ], function () {
+                    Route::get('/', 'CRM\Admin\Http\Controllers\Admin\StatisticController@getCardData')->name('admin.api.statistics.card.index');
+
+                    Route::get('/cards', 'CRM\Admin\Http\Controllers\Admin\StatisticController@getCards')->name('admin.api.statistics.cards.index');
+
+                    Route::post('/cards', 'CRM\Admin\Http\Controllers\Admin\StatisticController@updateCards')->name('admin.api.statistics.cards.update');
+
+                    Route::post('/day', 'CRM\Admin\Http\Controllers\Admin\StatisticController@createDayStatistics')->name('admin.api.statistics.day.create');
+
+                    Route::get('/calls_made_per_day', 'CRM\Admin\Http\Controllers\Admin\StatisticController@callsMadePerDay')->name('admin.api.statistics.calls_made_per_day');
+                });
+            });
+
             // Contacts Routes
             Route::group([
                 'prefix'    => 'contacts',
